@@ -1,0 +1,12 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: alterdata_finance
+    environment:
+      - POSTGRES_PASSWORD=alterdata@2026
+      - POSTGRES_USER=alterdata
+      - POSTGRES_DB=alterdata_finance
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.postgres-data:/var/lib/postgresql/data

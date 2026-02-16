@@ -1,0 +1,6 @@
+@AlterdataFinanceApi.API_HostAddress = http://localhost:5027
+
+GET {{AlterdataFinanceApi.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,6 +1,7 @@
 using AlterdataFinanceApi.Domain.Entities;
 using AlterdataFinanceApi.Domain.Enums;
 using AlterdataFinanceApi.Domain.Interfaces;
+using AlterdataFinanceApi.Domain.Models;
 using AlterdataFinanceApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +38,21 @@ public class TransactionRepository : ITransactionRepository
 
         return await query
             .OrderByDescending(t => t.Date)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<MonthlySummary>> GetMonthlySummaryAsync(int year)
+    {
+        return await _context.Transactions
+            .Where(t => t.Date.Year == year)
+            .GroupBy(t => t.Date.Month)
+            .Select(g => new MonthlySummary
+            {
+                Month = g.Key,
+                TotalExpenses = g.Where(t => t.Type == TransactionType.Expense).Sum(t => t.Amount),
+                TotalRevenues = g.Where(t => t.Type == TransactionType.Revenue).Sum(t => t.Amount)
+            })
+            .OrderBy(m => m.Month)
             .ToListAsync();
     }
 

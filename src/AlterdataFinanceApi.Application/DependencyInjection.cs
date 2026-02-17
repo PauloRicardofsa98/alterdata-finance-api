@@ -13,6 +13,7 @@ public static class DependencyInjection
         services.AddScoped<IAdministratorService, AdministratorService>();
         services.AddScoped<ITransactionService, TransactionService>();
         services.AddScoped<IReportService, ReportService>();
+        services.AddScoped<IDashboardService, DashboardService>();
         services.AddValidatorsFromAssemblyContaining<CreateAdministratorValidator>();
         return services;
     }

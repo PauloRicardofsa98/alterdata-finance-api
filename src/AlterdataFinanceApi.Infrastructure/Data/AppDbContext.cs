@@ -10,6 +10,7 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Administrator> Administrators => Set<Administrator>();
+    public DbSet<Transaction> Transactions => Set<Transaction>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

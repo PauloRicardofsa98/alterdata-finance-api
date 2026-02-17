@@ -1,8 +1,8 @@
 namespace AlterdataFinanceApi.Domain.Models;
 
-public class MonthlySummary
+public record MonthlySummary
 {
-    public int Month { get; set; }
-    public decimal TotalExpenses { get; set; }
-    public decimal TotalRevenues { get; set; }
+    public int Month { get; init; }
+    public decimal TotalExpenses { get; init; }
+    public decimal TotalRevenues { get; init; }
 }

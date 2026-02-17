@@ -1,12 +1,14 @@
 using AlterdataFinanceApi.Application.DTOs.Report;
 using AlterdataFinanceApi.Application.Interfaces;
 using AlterdataFinanceApi.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlterdataFinanceApi.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ReportsController(IReportService service) : ControllerBase
 {
     private readonly IReportService _service = service;

@@ -46,6 +46,14 @@ public class ExceptionHandlingMiddleware
                     })
                 } as object
             ),
+            UnauthorizedAccessException => (
+                HttpStatusCode.Unauthorized,
+                new
+                {
+                    Status = (int)HttpStatusCode.Unauthorized,
+                    Message = exception.Message
+                } as object
+            ),
             KeyNotFoundException => (
                 HttpStatusCode.NotFound,
                 new

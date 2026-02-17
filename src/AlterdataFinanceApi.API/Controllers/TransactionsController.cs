@@ -1,11 +1,13 @@
 using AlterdataFinanceApi.Application.DTOs.Transaction;
 using AlterdataFinanceApi.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlterdataFinanceApi.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class TransactionsController(ITransactionService service) : ControllerBase
 {
     private readonly ITransactionService _service = service;

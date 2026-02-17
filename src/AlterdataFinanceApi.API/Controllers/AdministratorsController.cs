@@ -1,11 +1,13 @@
 using AlterdataFinanceApi.Application.DTOs.Administrator;
 using AlterdataFinanceApi.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlterdataFinanceApi.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class AdministratorsController(IAdministratorService service) : ControllerBase
 {
     private readonly IAdministratorService _service = service;

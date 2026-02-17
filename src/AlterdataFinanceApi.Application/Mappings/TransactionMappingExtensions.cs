@@ -25,7 +25,7 @@ public static class TransactionMappingExtensions
         return new Transaction(
             request.Description,
             request.Amount,
-            request.Date,
+            DateTime.SpecifyKind(request.Date, DateTimeKind.Utc),
             request.Category,
             request.Type
         );

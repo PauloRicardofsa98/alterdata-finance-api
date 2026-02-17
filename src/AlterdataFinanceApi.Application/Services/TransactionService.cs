@@ -56,7 +56,7 @@ public class TransactionService : ITransactionService
         var entity = await _repository.GetByIdAsync(id)
             ?? throw new KeyNotFoundException("Transação não encontrada.");
 
-        entity.Update(request.Description, request.Amount, request.Date, request.Category, request.Type);
+        entity.Update(request.Description, request.Amount, DateTime.SpecifyKind(request.Date, DateTimeKind.Utc), request.Category, request.Type);
 
         var updated = await _repository.UpdateAsync(entity);
         return updated.ToResponse();

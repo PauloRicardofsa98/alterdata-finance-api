@@ -69,8 +69,7 @@ public class AdministratorService : IAdministratorService
                 throw new InvalidOperationException("Já existe um administrador com este e-mail.");
         }
 
-        entity.Name = request.Name;
-        entity.Email = request.Email;
+        entity.UpdateProfile(request.Name, request.Email);
 
         var updated = await _repository.UpdateAsync(entity);
         return updated.ToResponse();

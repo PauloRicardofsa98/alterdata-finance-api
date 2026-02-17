@@ -19,11 +19,6 @@ public static class AdministratorMappingExtensions
 
     public static Administrator ToEntity(this CreateAdministratorRequest request, string passwordHash)
     {
-        return new Administrator
-        {
-            Name = request.Name,
-            Email = request.Email,
-            PasswordHash = passwordHash
-        };
+        return new Administrator(request.Name, request.Email, passwordHash);
     }
 }

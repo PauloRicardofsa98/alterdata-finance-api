@@ -22,13 +22,12 @@ public static class TransactionMappingExtensions
 
     public static Transaction ToEntity(this CreateTransactionRequest request)
     {
-        return new Transaction
-        {
-            Description = request.Description,
-            Amount = request.Amount,
-            Date = request.Date,
-            Category = request.Category,
-            Type = request.Type
-        };
+        return new Transaction(
+            request.Description,
+            request.Amount,
+            request.Date,
+            request.Category,
+            request.Type
+        );
     }
 }

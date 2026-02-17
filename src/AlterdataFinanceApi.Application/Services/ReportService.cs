@@ -8,16 +8,16 @@ namespace AlterdataFinanceApi.Application.Services;
 
 public class ReportService : IReportService
 {
-    private readonly ITransactionRepository _repository;
+    private readonly ITransactionQueryRepository _queryRepository;
 
-    public ReportService(ITransactionRepository repository)
+    public ReportService(ITransactionQueryRepository queryRepository)
     {
-        _repository = repository;
+        _queryRepository = queryRepository;
     }
 
     public async Task<ReportResponse> GetReportByPeriodAsync(DateTime startDate, DateTime endDate, TransactionType? type)
     {
-        var transactions = await _repository.GetByPeriodAsync(startDate, endDate, type);
+        var transactions = await _queryRepository.GetByPeriodAsync(startDate, endDate, type);
         var transactionList = transactions.Select(t => t.ToResponse()).ToList();
 
         var totalExpenses = transactionList

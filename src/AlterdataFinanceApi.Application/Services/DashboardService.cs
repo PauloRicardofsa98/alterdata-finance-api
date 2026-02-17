@@ -7,16 +7,16 @@ namespace AlterdataFinanceApi.Application.Services;
 
 public class DashboardService : IDashboardService
 {
-    private readonly ITransactionRepository _repository;
+    private readonly ITransactionQueryRepository _queryRepository;
 
-    public DashboardService(ITransactionRepository repository)
+    public DashboardService(ITransactionQueryRepository queryRepository)
     {
-        _repository = repository;
+        _queryRepository = queryRepository;
     }
 
     public async Task<DashboardResponse> GetDashboardAsync(int year)
     {
-        var summaries = await _repository.GetMonthlySummaryAsync(year);
+        var summaries = await _queryRepository.GetMonthlySummaryAsync(year);
         var summaryDict = summaries.ToDictionary(s => s.Month);
 
         var monthlyData = Enumerable.Range(1, 12).Select(month =>

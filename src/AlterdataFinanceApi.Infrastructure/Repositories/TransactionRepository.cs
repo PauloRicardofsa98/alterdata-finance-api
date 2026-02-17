@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AlterdataFinanceApi.Infrastructure.Repositories;
 
-public class TransactionRepository : ITransactionRepository
+public class TransactionRepository : ITransactionRepository, ITransactionQueryRepository
 {
     private readonly AppDbContext _context;
 

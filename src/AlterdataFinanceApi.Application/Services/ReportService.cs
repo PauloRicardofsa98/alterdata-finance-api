@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Text;
 using AlterdataFinanceApi.Application.DTOs.Report;
 using AlterdataFinanceApi.Application.Interfaces;
 using AlterdataFinanceApi.Application.Mappings;
@@ -36,5 +38,28 @@ public class ReportService : IReportService
             StartDate: startDate,
             EndDate: endDate
         );
+    }
+
+    public string GenerateCsv(ReportResponse report)
+    {
+        var culture = new CultureInfo("pt-BR");
+        var sb = new StringBuilder();
+        sb.AppendLine("Descrição;Valor;Data;Categoria;Tipo");
+
+        foreach (var t in report.Transactions)
+        {
+            var valor = t.Amount.ToString("N2", culture);
+            var data = t.Date.ToString("dd/MM/yyyy");
+            var categoria = t.Category ?? "";
+            var tipo = t.Type == TransactionType.Revenue ? "Receita" : "Despesa";
+            sb.AppendLine($"{t.Description};{valor};{data};{categoria};{tipo}");
+        }
+
+        sb.AppendLine();
+        sb.AppendLine($"Total Receitas;{report.TotalRevenues.ToString("N2", culture)};;;");
+        sb.AppendLine($"Total Despesas;{report.TotalExpenses.ToString("N2", culture)};;;");
+        sb.AppendLine($"Balanço;{report.Balance.ToString("N2", culture)};;;");
+
+        return sb.ToString();
     }
 }

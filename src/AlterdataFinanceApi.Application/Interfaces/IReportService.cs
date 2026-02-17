@@ -6,4 +6,5 @@ namespace AlterdataFinanceApi.Application.Interfaces;
 public interface IReportService
 {
     Task<ReportResponse> GetReportByPeriodAsync(DateTime startDate, DateTime endDate, TransactionType? type);
+    string GenerateCsv(ReportResponse report);
 }

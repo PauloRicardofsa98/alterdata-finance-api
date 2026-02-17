@@ -24,7 +24,7 @@ public class TransactionRepository : ITransactionRepository, ITransactionQueryRe
     public async Task<IEnumerable<Transaction>> GetAllAsync()
     {
         return await _context.Transactions
-            .OrderByDescending(t => t.Date)
+            .OrderByDescending(t => t.UpdatedAt ?? t.CreatedAt)
             .ToListAsync();
     }
 

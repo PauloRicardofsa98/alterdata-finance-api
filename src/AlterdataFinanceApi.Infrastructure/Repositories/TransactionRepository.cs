@@ -1,4 +1,5 @@
 using AlterdataFinanceApi.Domain.Entities;
+using AlterdataFinanceApi.Domain.Enums;
 using AlterdataFinanceApi.Domain.Interfaces;
 using AlterdataFinanceApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,19 @@ public class TransactionRepository : ITransactionRepository
     public async Task<IEnumerable<Transaction>> GetAllAsync()
     {
         return await _context.Transactions
+            .OrderByDescending(t => t.Date)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Transaction>> GetByPeriodAsync(DateTime startDate, DateTime endDate, TransactionType? type)
+    {
+        var query = _context.Transactions
+            .Where(t => t.Date >= startDate && t.Date <= endDate);
+
+        if (type.HasValue)
+            query = query.Where(t => t.Type == type.Value);
+
+        return await query
             .OrderByDescending(t => t.Date)
             .ToListAsync();
     }

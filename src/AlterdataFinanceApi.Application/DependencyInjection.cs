@@ -12,6 +12,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IAdministratorService, AdministratorService>();
         services.AddScoped<ITransactionService, TransactionService>();
+        services.AddScoped<IReportService, ReportService>();
         services.AddValidatorsFromAssemblyContaining<CreateAdministratorValidator>();
         return services;
     }
